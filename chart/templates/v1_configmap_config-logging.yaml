@@ -70,4 +70,4 @@ metadata:
   labels:
     operator.tekton.dev/release: devel
   name: config-logging
-  namespace: tekton-operator
+  namespace: {{ .Release.Namespace }}

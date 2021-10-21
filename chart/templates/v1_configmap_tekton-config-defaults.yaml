@@ -8,4 +8,4 @@ metadata:
   labels:
     operator.tekton.dev/release: devel
   name: tekton-config-defaults
-  namespace: tekton-operator
+  namespace: {{ .Release.Namespace }}
