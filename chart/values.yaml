@@ -1,0 +1,29 @@
+operator:
+  image:
+    repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
+    tag: v1.40.1
+    pullPolicy: IfNotPresent
+    pullSecrets:
+      - private-registry  
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 100m
+      memory: 512Mi
+
+webhook:
+  image:
+    repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
+    tag: v1.40.1
+    pullPolicy: IfNotPresent
+    pullSecrets:
+      - private-registry 
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 100m
+      memory: 512Mi
