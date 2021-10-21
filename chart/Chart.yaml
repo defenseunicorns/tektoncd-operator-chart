@@ -3,5 +3,5 @@ name: tektoncd-operator
 description: A Helm chart for Kubernetes
 type: application
 version: 0.0.1
-appVersion: "0.50.0"
+appVersion: "0.49.0"
 icon: https://github.com/tektoncd/friends/raw/main/tekton-friends.png

@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    operator.tekton.dev/release: v0.50.0
-    version: v0.50.0
+    operator.tekton.dev/release: devel
+    version: v0.49.0
   name: tekton-operator
   namespace: tekton-operator
 spec:
@@ -19,6 +19,10 @@ spec:
     spec:
       containers:
       - env:
+        - name: IMAGE_PIPELINES_PROXY
+          value: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/proxy-webhook:v0.49.0@sha256:561dc8867bb94007208806178d24efff59a290f4082b6e72a0406d8532060c18
+        - name: IMAGE_JOB_PRUNER_TKN
+          value: gcr.io/tekton-releases/dogfooding/tkn@sha256:f69a02ef099d8915e9e4ea1b74e43b7a9309fc97cf23cb457ebf191e73491677
         - name: SYSTEM_NAMESPACE
           valueFrom:
             fieldRef:
@@ -29,16 +33,6 @@ spec:
               fieldPath: metadata.name
         - name: OPERATOR_NAME
           value: tekton-operator
-        - name: IMAGE_PIPELINES_PROXY
-          value: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/proxy-webhook:v0.50.0@sha256:92609a303f151781f58c24ac72deab67d12b9fa7553ee14b4d6e9ae5f7e0d9d9
-        - name: IMAGE_JOB_PRUNER_TKN
-          value: gcr.io/tekton-releases/dogfooding/tkn@sha256:025de221fb059ca24a3b2d988889ea34bce48dc76c0cf0d6b4499edb8c21325f
-        - name: METRICS_DOMAIN
-          value: tekton.dev/operator
-        - name: VERSION
-          value: devel
-        - name: CONFIG_OBSERVABILITY_NAME
-          value: tekton-config-observability
         - name: AUTOINSTALL_COMPONENTS
           valueFrom:
             configMapKeyRef:
@@ -49,7 +43,6 @@ spec:
             configMapKeyRef:
               key: DEFAULT_TARGET_NAMESPACE
               name: tekton-config-defaults
-        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/operator:v0.50.0@sha256:fc77b6184ab793afa284081cab1d24d1d97a3c5dde9bb59a7ee0f4b4cb27e023
-        imagePullPolicy: Always
+        image: gcr.io/tekton-releases/github.com/tektoncd/operator/cmd/kubernetes/operator:v0.49.0@sha256:bd055c27d897f327ddb4e846782fccfda3b1d3d2397d5c764d8038547acde391
         name: tekton-operator
       serviceAccountName: tekton-operator
