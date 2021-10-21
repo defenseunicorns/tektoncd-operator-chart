@@ -32,6 +32,10 @@ spec:
         image: "{{ .Values.webhook.image.repo }}:{{ .Values.webhook.image.tag }}"
         imagePullPolicy: {{ .Values.webhook.image.pullPolicy | default "Always" }}
         name: webhook
+        {{- if .Values.webhook.resources }}
+        resources:
+        {{- toYaml .Values.webhook.resources | nindent 10 }}
+        {{- end }}
         ports:
         - containerPort: 8443
           name: https-webhook
